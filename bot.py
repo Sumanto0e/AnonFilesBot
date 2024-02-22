@@ -178,22 +178,6 @@ async def upload(client, message):
         await m.edit("__Pʀᴏᴄᴇss Fᴀɪʟᴇᴅ, Mᴀʏʙᴇ Tɪᴍᴇ Oᴜᴛ Dᴜᴇ Tᴏ Lᴀʀɢᴇ Fɪʟᴇ Sɪᴢᴇ!__")
         return
       
-@bot.on_message(filters.regex(pattern="https://cdn-") & filters.private & ~filters.edited)
-async def url(client, message):
-    msg = await message.reply("__Cʜᴇᴄᴋɪɴɢ Uʀʟ...__")
-    lenk = message.text
-    cap = "© @AvishkarPatil"
-    thumb = "./thumb.jpg"
-    try:
-         await msg.edit("**Bɪɢ Fɪʟᴇs Wɪʟʟ Tᴀᴋᴇ Mᴏʀᴇ Tɪᴍᴇ, Dᴏɴ'ᴛ Pᴀɴɪᴄ!**")
-         filename = await download(lenk)
-         await msg.edit("Uploading File To Telegram...")
-         await message.reply_document(filename, caption=cap, thumb=thumb)
-         await msg.delete()
-         os.remove(filename)
-    except Exception:
-        await msg.edit("__Pʀᴏᴄᴇss Fᴀɪʟᴇᴅ, Mᴀʏʙᴇ Tɪᴍᴇ Oᴜᴛ Dᴜᴇ Tᴏ Lᴀʀɢᴇ Fɪʟᴇ Sɪᴢᴇ!__")
-        
 async def download(url):
     ext = url.split(".")[-1]
     filename = str(randint(1000, 9999)) + "." + ext
